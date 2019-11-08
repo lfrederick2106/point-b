@@ -1,0 +1,103 @@
+/* Color Theme Swatches in Hex */
+// .Friends-on-roadtrip-together-taking-a-selfie-1-hex { color: #A6A6A6; }
+// .Friends-on-roadtrip-together-taking-a-selfie-2-hex { color: #D9D2B0; }
+// .Friends-on-roadtrip-together-taking-a-selfie-3-hex { color: #A6754B; }
+// .Friends-on-roadtrip-together-taking-a-selfie-4-hex { color: #D98C71; }
+// .Friends-on-roadtrip-together-taking-a-selfie-5-hex { color: #594D4D; }
+
+html {
+    font-size: 62.5%; // 1rem is 10px
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'montserrat';
+}
+
+body {
+    overflow-x: hidden;
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+
+    background-color: #D98C71;
+
+    padding-top: 87px; /*50px for the height of the navbar + 37px for the offset*/
+    padding-bottom: 50px; /*50px for the height of the bottom navbar*/
+}
+
+html, body {
+    height: 100%; /*Fixes the height to 100% of the viewport*/
+}
+
+.loginMenuContainer {
+    position: relative;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    left:0;
+    z-index: 1;
+  }
+  
+.loginMenu {
+    // display: none;
+    position: relative;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    right: 0;
+  }
+  
+// .loginMenuContainer:hover .loginMenu {
+//     display: inline-block;
+//   }
+
+.NavBar {
+    background-image: linear-gradient(to bottom right, #A6A6A6, #D9D2B0);
+    width: 100%;
+    position: fixed;
+    padding: 0;
+
+    top: 37px; /*Offsets the top navbar 37px from the top of the viewport*/
+}
+
+button {
+    float: right;
+    background-color: #A6A6A6; /* Green */
+    border: none;
+    color: #D9D2B0;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #D98C71;
+    color: white;
+  }
+
+h1 {
+    position: relative;
+}
+
+.app {
+    margin-top: 2rem;
+    // display: grid;
+    justify-items: center;
+    background-color: #A6754B;
+}
