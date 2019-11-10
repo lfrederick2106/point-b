@@ -10,11 +10,16 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      user: {},
+      lat1: "",
+      lon1: "",
+      lat2: "",
+      lon2: ""
     };
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   checkLoginStatus() {
@@ -55,6 +60,19 @@ export default class App extends Component {
     })
   }
 
+  handleInputChange(event) {
+    const target = event.target;
+    const value = event.target.value;
+    const name = target.name;
+
+    this.setState({
+        [name]: value
+      });
+
+    console.log('handleInputChange was called. target.name:', target.name)
+}
+
+
   render() {
     return (
       <div className='app'>
@@ -68,7 +86,12 @@ export default class App extends Component {
                 { ... props} 
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout}
+                handleInputChange={this.handleInputChange}
                 loggedInStatus={this.state.loggedInStatus}
+                lat1={this.state.lat1}
+                lon1={this.state.lon1}
+                lat2={this.state.lat2}
+                lon2={this.state.lon2}
               />
             )}
             />

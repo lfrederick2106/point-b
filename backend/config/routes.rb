@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
 
-  get '/metro_search', to: 'metro_searches#new'
-  post '/metro_search', to: 'metro_searches#show'
+  # get '/metro_search', to: 'metro_searches#new'
+  # post '/metro_search', to: 'metro_searches#show'
 
   root to: "static#home"
 end

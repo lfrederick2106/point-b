@@ -42,7 +42,10 @@ export default class Home extends Component {
                 />
                 
                 <h1>Status: {this.props.loggedInStatus}</h1>
-                < SearchForm/>
+                < SearchForm
+                    lat1={this.props.lat1}
+                    onChange={this.props.handleInputChange}
+                />
                 <div
                     data-skyscanner-widget="FlightSearchWidget"
                     data-locale="en-US"
@@ -51,7 +54,7 @@ export default class Home extends Component {
                     data-button-colour="#A6A6A6"
                     data-colour="#D9D2B0"
                 ></div>
-                <script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script>
+
                 < Deals/>
                 < Footer/>
             </div>
