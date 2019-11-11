@@ -33,7 +33,8 @@ class ItinerariesController < ApplicationController
           http.request(request)
       end
 
-      puts response.body
+      puts "response.body:", response.body
+      puts "you made a get request I think?? to #index or /itineraries or some shit"
       render json: response.body
   end
 
@@ -69,7 +70,8 @@ class ItinerariesController < ApplicationController
         http.request(request)
     end
 
-    puts response.body
+    puts "response.body:", response.body
+    puts "you made a get request I think?? (to #show or /itineraries/1?"
     render json: response.body
 
   end
@@ -85,19 +87,20 @@ class ItinerariesController < ApplicationController
 
   # POST /itineraries
   # POST /itineraries.json
-  def create
-    @itinerary = Itinerary.new(itinerary_params)
+  # def create
+  #   @itinerary = Itinerary.new(itinerary_params)
 
-    respond_to do |format|
-      if @itinerary.save
-        format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
-        format.json { render :show, status: :created, location: @itinerary }
-      else
-        format.html { render :new }
-        format.json { render json: @itinerary.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @itinerary.save
+  #       format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
+  #       format.json { render :show, status: :created, location: @itinerary }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @itinerary.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  #   puts "you made a post request I think??"
+  # end
 
   # PATCH/PUT /itineraries/1
   # PATCH/PUT /itineraries/1.json

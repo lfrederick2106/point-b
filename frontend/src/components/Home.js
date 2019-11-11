@@ -4,7 +4,6 @@ import Registration from './auth/Registration'
 import Login from './auth/Login';
 import NavBar from './NavBar';
 import SearchForm from './SearchForm';
-import Deals from './Deals';
 import Footer from './Footer';
 import 'react-widgets/dist/css/react-widgets.css';
 

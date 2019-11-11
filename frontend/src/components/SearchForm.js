@@ -8,19 +8,13 @@ export class SearchForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-    handleSubmit(lat1, lon1, lat2, lon2){
-    let body = JSON.stringify({lat1: lat1, lon1: lon1, lat2: lat2, lon2: lon2})
-    fetch('http://localhost:3001/itineraries/', {
-        method: 'PATCH',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: body,
-    }).then((response) => {return response.json()})
-    .then((data)=>{
-        console.log("is this PATCH request working? data:", data)
-    })
-    
+    handleSubmit(event){
+        alert('You have called handleSubmit!');
+        event.preventDefault();
+        let body = JSON.stringify({lat1: this.props.lat1, lon1: this.props.lon1, lat2: this.props.lat2, lon2: this.props.lon2})
+        fetch('http://localhost:3001/itineraries/1')
+        .then((response) => {return response.json()})
+        .then((itineraries) => {console.log("is this http request working? itineraries:", itineraries.d.results)})
     }
 
     render() {
@@ -29,7 +23,7 @@ export class SearchForm extends Component {
             <div>
                 <h2>SearchForm</h2>
 
-                <form action="http://localhost:3001/itineraries/" method="PATCH">
+                <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>lat1:</label>
                         <input 

@@ -51,7 +51,7 @@ export default class App extends Component {
 
     fetch('http://localhost:3001/itineraries/1')
     .then(response => response.json())
-    .then(itineraries => {console.log("itineraries:", itineraries.d.results)})
+    .then(itineraries => {console.log("itineraries:", itineraries.d.results)}) // <- Need to make this request but with the variables passed in from the form
 
   }
 
