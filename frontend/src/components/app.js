@@ -47,7 +47,11 @@ export default class App extends Component {
 
     fetch('http://localhost:3001/itineraries')
     .then(response => response.json())
-    .then(data => {console.log("routes:", data.d.results)}) // <<- This works!!
+    .then(routes => {console.log("routes:", routes.d.results)}) // <<- This works!!
+
+    fetch('http://localhost:3001/itineraries/1')
+    .then(response => response.json())
+    .then(itineraries => {console.log("itineraries:", itineraries.d.results)})
 
   }
 

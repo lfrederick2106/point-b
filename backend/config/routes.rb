@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
   get :itineraries, to: "itineraries#get_all_routes"
+  get '/itineraries/directions', to: 'itineraries#calculate_itinerary_by_points'
 
   # get '/metro_search', to: 'metro_searches#new'
   # post '/metro_search', to: 'metro_searches#show'

@@ -1,7 +1,7 @@
 require 'net/http'
 
 class ItinerariesController < ApplicationController
-  before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
+  # before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
   # GET /itineraries
   # GET /itineraries.json
@@ -39,9 +39,40 @@ class ItinerariesController < ApplicationController
 
   # GET /itineraries/1
   # GET /itineraries/1.json
-  # def show
+  def show
+    uri = URI('https://api.ridemetro.org/data/CalculateItineraryByPoints')
 
-  # end
+    query = URI.encode_www_form({
+        # Request parameters
+        'lat1' => '29.759140',
+        'lon1' => '-95.363548',
+        'lat2' => '29.741399',
+        'lon2' => '-95.587787',
+        'startTime' => `datetime'#{Time.now.utc.iso8601}'`,
+        '$format' => 'JSON',
+        '$orderby' => 'EndTime'
+    })
+
+    if uri.query && uri.query.length > 0
+        uri.query += '&' + query
+    else
+        uri.query = query
+    end
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    # Request headers
+    request['Ocp-Apim-Subscription-Key'] = '6741c2454ce544309f5020fbd7b6e4ca'
+    # Request body
+    request.body = "{body}"
+
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+        http.request(request)
+    end
+
+    puts response.body
+    render json: response.body
+
+  end
 
   # GET /itineraries/new
   # def new
@@ -102,36 +133,5 @@ class ItinerariesController < ApplicationController
   #   def itinerary_params
   #     params.require(:itinerary).permit(:lat1, :lon1, :lat2, :lon2)
   #   end
-
-    # def get_all_routes
-
-    #   uri = URI('https://api.ridemetro.org/data/Routes')
-
-    #   query = URI.encode_www_form({
-    #       # Request parameters
-    #       '$filter' => '{String}',
-    #       '$top' => '{string}',
-    #       '$skip' => '{string}',
-    #       '$format' => 'json',
-    #       '$orderby' => '{String}'
-    #   })
-
-    #   if uri.query && uri.query.length > 0
-    #       uri.query += '&' + query
-    #   else
-    #       uri.query = query
-    #   end
-
-    #   request = Net::HTTP::Get.new(uri.request_uri)
-    #   # Request headers
-    #   request['Ocp-Apim-Subscription-Key'] = '6741c2454ce544309f5020fbd7b6e4ca'
-    #   # Request body
-    #   request.body = "{body}"
-
-    #   response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-    #       http.request(request)
-    #   end
-
-    #   puts response.body
-    # end
+    
 end
