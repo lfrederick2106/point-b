@@ -36,7 +36,7 @@ export class LoginCard extends Component {
 
     render() {
         return (
-            <div class="loginMenuContainer">
+            <div className="loginMenuContainer">
                 <button onClick={this.showMenu}>
                     Show menu
                 </button>
@@ -45,7 +45,7 @@ export class LoginCard extends Component {
                     this.state.showMenu
                         ? (
                             <div 
-                                class="loginMenu"
+                                className="loginMenu"
                                 ref={(element) => {
                                     this.dropdownMenu = element;
                                 }}

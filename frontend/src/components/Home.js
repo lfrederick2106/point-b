@@ -54,8 +54,6 @@ export default class Home extends Component {
                     data-button-colour="#A6A6A6"
                     data-colour="#D9D2B0"
                 ></div>
-
-                < Deals/>
                 < Footer/>
             </div>
         )

@@ -6,9 +6,7 @@ export class Deals extends Component {
         return (
             <div>
                 <h2>Deals</h2>
-                < CheapTicket />
-                < CheapTicket />
-                < CheapTicket />
+            
             </div>
         )
     }
