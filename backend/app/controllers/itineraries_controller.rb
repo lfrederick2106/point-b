@@ -85,19 +85,19 @@ class ItinerariesController < ApplicationController
 
   # POST /itineraries
   # POST /itineraries.json
-  # def create
-  #   @itinerary = Itinerary.new(itinerary_params)
+  def create
+    @itinerary = Itinerary.new(itinerary_params)
 
-  #   respond_to do |format|
-  #     if @itinerary.save
-  #       format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
-  #       format.json { render :show, status: :created, location: @itinerary }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @itinerary.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+      if @itinerary.save
+        format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
+        format.json { render :show, status: :created, location: @itinerary }
+      else
+        format.html { render :new }
+        format.json { render json: @itinerary.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # PATCH/PUT /itineraries/1
   # PATCH/PUT /itineraries/1.json
