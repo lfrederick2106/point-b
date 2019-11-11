@@ -45,9 +45,9 @@ export default class App extends Component {
   componentDidMount() {
     this.checkLoginStatus();
 
-    fetch('http://localhost:3001/')
+    fetch('http://localhost:3001/itineraries')
     .then(response => response.json())
-    .then(data => {console.log("data:", data)}) // <<- This works!!
+    .then(data => {console.log("routes:", data.d.results)}) // <<- This works!!
 
   }
 
