@@ -18,7 +18,6 @@ export class SearchForm extends Component {
     }
 
     render() {
-        console.log('lat1:', this.props.lat1)
         return (
             <div>
                 <h2>I am SearchForm.js.</h2>

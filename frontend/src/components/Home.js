@@ -28,7 +28,6 @@ export default class Home extends Component {
             console.log('logout error', error);
         });
     }
-
     render() {
         return (
             <div>

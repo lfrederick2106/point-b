@@ -46,9 +46,10 @@ export default class App extends Component {
   componentDidMount() {
     this.checkLoginStatus();
 
-    fetch('http://localhost:3001/itineraries')
-    .then(response => response.json())
-    .then(routes => {console.log("routes:", routes.d.results)}) // <<- This works!!
+    // This fetches all routes:
+    // fetch('http://localhost:3001/itineraries')
+    // .then(response => response.json())
+    // .then(routes => {console.log("routes:", routes.d.results)})
 
     fetch('http://localhost:3001/itineraries/1')
     .then(response => response.json())
@@ -56,7 +57,7 @@ export default class App extends Component {
       this.setState({
         itineraries: itineraries.d.results
       })
-      console.log("itineraries:", itineraries.d.results)}) // <- Need to make this request but with the variables passed in from the form
+      })
 
   }
 
