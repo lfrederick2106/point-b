@@ -21,7 +21,7 @@ export class SearchForm extends Component {
         console.log('lat1:', this.props.lat1)
         return (
             <div>
-                <h2>SearchForm</h2>
+                <h2>I am SearchForm.js.</h2>
 
                 <form onSubmit={this.handleSubmit}>
                     <div>

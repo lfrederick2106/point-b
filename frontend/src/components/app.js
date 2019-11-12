@@ -14,7 +14,8 @@ export default class App extends Component {
       lat1: "",
       lon1: "",
       lat2: "",
-      lon2: ""
+      lon2: "",
+      itineraries: []
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -51,7 +52,11 @@ export default class App extends Component {
 
     fetch('http://localhost:3001/itineraries/1')
     .then(response => response.json())
-    .then(itineraries => {console.log("itineraries:", itineraries.d.results)}) // <- Need to make this request but with the variables passed in from the form
+    .then(itineraries => {
+      this.setState({
+        itineraries: itineraries.d.results
+      })
+      console.log("itineraries:", itineraries.d.results)}) // <- Need to make this request but with the variables passed in from the form
 
   }
 
@@ -101,6 +106,7 @@ export default class App extends Component {
                 lon1={this.state.lon1}
                 lat2={this.state.lat2}
                 lon2={this.state.lon2}
+                itineraries={this.state.itineraries}
               />
             )}
             />

@@ -51,7 +51,8 @@ class ItinerariesController < ApplicationController
         'lon2' => '-95.587787',
         'startTime' => `datetime'#{Time.now.utc.iso8601}'`,
         '$format' => 'JSON',
-        '$orderby' => 'EndTime'
+        '$orderby' => 'EndTime',
+        '$expand' => 'Legs'
     })
 
     if uri.query && uri.query.length > 0

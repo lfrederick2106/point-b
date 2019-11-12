@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import SearchForm from './SearchForm';
 import Footer from './Footer';
 import 'react-widgets/dist/css/react-widgets.css';
+import Directions from './Directions';
 
 export default class Home extends Component {
     constructor(props) {
@@ -45,14 +46,13 @@ export default class Home extends Component {
                     lat1={this.props.lat1}
                     onChange={this.props.handleInputChange}
                 />
-                <div
-                    data-skyscanner-widget="FlightSearchWidget"
-                    data-locale="en-US"
-                    data-market="US"
-                    data-currency="USD"
-                    data-button-colour="#A6A6A6"
-                    data-colour="#D9D2B0"
-                ></div>
+                < Directions
+                    lat1={this.props.lat1}
+                    lon1={this.props.lon1}
+                    lat2={this.props.lat2}
+                    lon2={this.props.lon2}
+                    itineraries={this.props.itineraries}
+                />
                 < Footer/>
             </div>
         )
