@@ -40,20 +40,22 @@ export default class Home extends Component {
                 
                 <h1>Status: {this.props.loggedInStatus}</h1>
                 < SearchForm
-                    origin={this.props.origin}
-                    destination={this.props.destination}
+                    origin_lat={this.props.origin_lat}
+                    origin_lon={this.props.origin_lon}
+                    origin_address={this.props.origin_address}
+                    destination_lat={this.props.destination_lat}
+                    destination_lon={this.props.destination_lon}
                     destination_address={this.props.destination_address}
                     onChange={this.props.handleInputChange}
                     onSubmit={this.props.handleSubmit}
                 />
                 < Directions
-                    // lat1={this.props.lat1}
-                    // lon1={this.props.lon1}
-                    // lat2={this.props.lat2}
-                    // lon2={this.props.lon2}
-                    origin={this.props.origin}
-                    destination={this.props.destination}
-                    // destination_address={this.props.destination_address}
+                    origin_lat={this.props.origin_lat}
+                    origin_lon={this.props.origin_lon}
+                    origin_address={this.props.origin_address}
+                    destination_lat={this.props.destination_lat}
+                    destination_lon={this.props.destination_lon}
+                    destination_address={this.props.destination_address}
                     itineraries={this.props.itineraries}
                 />
                 < Footer/>

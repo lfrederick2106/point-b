@@ -4,21 +4,7 @@ export class SearchForm extends Component {
 
     constructor(props) {
         super(props);
-    
-        // this.handleSubmit = this.handleSubmit.bind(this);
       }
-
-    // handleSubmit(event){
-    //     alert('You have called handleSubmit!');
-    //     event.preventDefault();
-    //     let body = JSON.stringify({lat1: this.props.lat1, lon1: this.props.lon1, lat2: this.props.lat2, lon2: this.props.lon2})
-    //     fetch('http://localhost:3001/itineraries/1')
-    //     .then((response) => {return response.json()})
-    //     .then((itineraries) => {console.log("is this http request working? itineraries:", itineraries.d.results)
-    //         this.setState({
-
-    //         })})
-    // }
 
     render() {
         return (
@@ -29,56 +15,19 @@ export class SearchForm extends Component {
                 <div>
                         <label>Starting address:</label>
                         <input 
-                            name="origin" 
-                            id="origin" 
-                            value={this.props.origin} 
+                            name="origin_address" 
+                            id="origin_address" 
+                            value={this.props.origin_address} 
                             onChange={this.props.onChange}></input>
                     </div>
                     <div>
                         <label>Destination address:</label>
                         <input 
-                            name="destination" 
-                            id="destination" 
-                            value={this.props.destination} 
+                            name="destination_address" 
+                            id="destination_address" 
+                            value={this.props.destination_address} 
                             onChange={this.props.onChange}></input>
                     </div>
-
-{/* 
-                    <div>
-                        <label>lat1:</label>
-                        <input 
-                            name="lat1" 
-                            id="lat1" 
-                            value={this.props.lat1} 
-                            onChange={this.props.onChange}></input>
-                    </div>
-                    <div>
-                        <label>lon1:</label>
-                        <input 
-                            name="lon1" 
-                            id="lon1" 
-                            value={this.props.lon1} 
-                            onChange={this.props.onChange}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>lat2:</label>
-                        <input 
-                            name="lat2" 
-                            id="lat2" 
-                            value={this.props.lat2} 
-                            onChange={this.props.onChange}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>lon2:</label>
-                        <input 
-                            name="lon2" 
-                            id="lon2" 
-                            value={this.props.lon2} 
-                            onChange={this.props.onChange}
-                        ></input>
-                    </div> */}
                     <div>
                         <input type="submit" value="Submit" />
                     </div>

@@ -11,9 +11,12 @@ export default class App extends Component {
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
-      origin: "",
-      destination: "",
+      origin_address:"",
+      origin_lat:"",
+      origin_lon:"",
       destination_address:"",
+      destination_lat:"",
+      destination_lon:"",
       itineraries: []
     };
 
@@ -85,18 +88,21 @@ export default class App extends Component {
       });
 
     console.log(`handleInputChange was called. ${target.name}:`, target.value)
-    console.log(`this.state.origin:`, this.state.origin)
-    console.log(`this.state.destination:`, this.state.destination)
+    console.log(`this.state.origin_address:`, this.state.origin_address)
+    console.log(`this.state.origin_lat:`, this.state.origin_lat)
+    console.log(`this.state.origin_lon:`, this.state.origin_lon)
 }
 
 handleSubmit = (event) =>{
   alert('You have called handleSubmit!');
   event.preventDefault();
+  this.convertAddressToLatLon(this.state.origin, this.state.destination)
+  console.log(`this.state.origin_address:`, this.state.origin_address)
+    console.log(`this.state.origin_lat:`, this.state.origin_lat)
+    console.log(`this.state.origin_lon:`, this.state.origin_lon)
 
-  this.convertAddressToLatLon(event.target.value)
-
-  
-  let body = JSON.stringify({origin: this.state.origin, destination: this.state.destination })
+  // debugger
+  let body = JSON.stringify({lat1: this.state.origin_lat, lon1: this.state.origin_lon, lat2: this.state.destination_lat, lon2: this.state.destination_lon })
   fetch('http://localhost:3001/itineraries/1', {
     method: 'PATCH',
     headers: {
@@ -104,52 +110,49 @@ handleSubmit = (event) =>{
     },
     body: body,
   })
-  .then(response => response.json())
+  .then(response => response.json(), console.log('PATCH request to the backend is happening'))
     .then(itineraries => {
       console.log('itineraries:', itineraries)
-      // this.setState({
-      //   itineraries: itineraries.d.results
-      // })
-      })
+        // this.setState({
+        //   itineraries: itineraries.d.results
+        // })
+    })
 }
 
-convertAddressToLatLon(address) {
+convertAddressToLatLon(origin_address, destination_address) {
   // Converting the user's address input into lat/long coordinates
-
-  // fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${address}&callback=geocodeResult`)
-  //   .then(response => response.json())
-  //   .then(response => console.log(response));
-
-
-  const Http = new XMLHttpRequest();
   
-  const url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${address}`;
-  // Http.open("GET", url, true);
-  // // Http.responseType = 'json';
-  // Http.send();
-
-  // Http.onreadystatechange = () => {
-  //   if(Http.status === 200){  
-  //   }
-  //   if(Http.responseText !== null && Http.responseText.length > 0){
-  //     // var obj = JSON.parse(Http.responseText)
-  //     console.log(obj)
-  //   }
-    
-    // console.log('Http.geocodeResult:', Http.geocodeResult)
-
-  fetch(url)
+  const origin_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${origin_address}`;
+  const destination_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${destination_address}`;
+  
+  fetch(origin_url)
   .then(res=> {
     return res.json()
   })
   .then(response => {
-    console.log(response.results[0].locations[0].latLng)
+    this.setState({
+      origin_lat: response.results[0].locations[0].latLng.lat,
+      origin_lon: response.results[0].locations[0].latLng.lng
+    })
+
+    console.log('this.state.origin_lat:', this.state.origin_lat) // <<- Need to be setting state of itineraries here
+    console.log('this.state.origin_lon:', this.state.origin_lon) 
   })
-  
-  // }
+
+  fetch(destination_url)
+  .then(res=> {
+    return res.json()
+  })
+  .then(response => {
+    this.setState({
+      destination_lat: response.results[0].locations[0].latLng.lat,
+      destination_lon: response.results[0].locations[0].latLng.lng
+    })
+
+    console.log('this.state.destination_lat:', this.state.destination_lat) // <<- This is too late
+    console.log('this.state.destination_lon:', this.state.destination_lon) 
+  })
 }
-
-
   render() {
     return (
       <div className='app'>
@@ -166,12 +169,10 @@ convertAddressToLatLon(address) {
                 handleInputChange={this.handleInputChange}
                 handleSubmit={this.handleSubmit}
                 loggedInStatus={this.state.loggedInStatus}
-                // lat1={this.state.lat1}
-                // lon1={this.state.lon1}
-                // lat2={this.state.lat2}
-                // lon2={this.state.lon2}
-                origin={this.state.origin}
-                destination={this.state.destination}
+                origin_lat={this.state.origin_lat}
+                origin_lon={this.state.origin_lon}
+                destination_lat={this.state.destination_lat}
+                destination_lon={this.state.destination_lon}
                 destination_address={this.state.destination_address}
                 itineraries={this.state.itineraries}
               />

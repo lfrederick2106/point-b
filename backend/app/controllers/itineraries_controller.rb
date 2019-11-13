@@ -46,10 +46,10 @@ class ItinerariesController < ApplicationController
 
     query = URI.encode_www_form({
         # Request parameters
-        'lat1' => '29.741390',
-        'lon1' => '-95.587790',
-        'lat2' => '29.751080',
-        'lon2' => '-95.554380',
+        'lat1' => '',
+        'lon1' => '',
+        'lat2' => '',
+        'lon2' => '',
         'startTime' => `datetime'#{Time.now.utc.iso8601}'`,
         '$format' => 'JSON',
         '$orderby' => 'EndTime',
