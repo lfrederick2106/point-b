@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Registration from './auth/Registration'
-import Login from './auth/Login';
+// import Registration from './auth/Registration'
+// import Login from './auth/Login';
 import NavBar from './NavBar';
 import SearchForm from './SearchForm';
 import Footer from './Footer';
@@ -42,14 +42,20 @@ export default class Home extends Component {
                 
                 <h1>Status: {this.props.loggedInStatus}</h1>
                 < SearchForm
-                    lat1={this.props.lat1}
+                    origin={this.props.origin}
+                    destination={this.props.destination}
+                    destination_address={this.props.destination_address}
                     onChange={this.props.handleInputChange}
+                    onSubmit={this.props.handleSubmit}
                 />
                 < Directions
-                    lat1={this.props.lat1}
-                    lon1={this.props.lon1}
-                    lat2={this.props.lat2}
-                    lon2={this.props.lon2}
+                    // lat1={this.props.lat1}
+                    // lon1={this.props.lon1}
+                    // lat2={this.props.lat2}
+                    // lon2={this.props.lon2}
+                    origin={this.props.origin}
+                    destination={this.props.destination}
+                    // destination_address={this.props.destination_address}
                     itineraries={this.props.itineraries}
                 />
                 < Footer/>

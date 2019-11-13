@@ -11,16 +11,16 @@ export default class App extends Component {
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
-      lat1: "",
-      lon1: "",
-      lat2: "",
-      lon2: "",
+      origin: "",
+      destination: "",
+      destination_address:"",
       itineraries: []
     };
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   checkLoginStatus() {
@@ -84,7 +84,64 @@ export default class App extends Component {
         [name]: value
       });
 
-    console.log('handleInputChange was called. target.name:', target.name)
+    console.log(`handleInputChange was called. ${target.name}:`, target.value)
+    console.log(`this.state.origin:`, this.state.origin)
+    console.log(`this.state.destination:`, this.state.destination)
+}
+
+handleSubmit = (event) =>{
+  alert('You have called handleSubmit!');
+  event.preventDefault();
+
+  this.convertAddressToLatLon(event.target.value)
+
+  
+  let body = JSON.stringify({origin: this.state.origin, destination: this.state.destination })
+  fetch('http://localhost:3001/itineraries/1', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body,
+  })
+  .then(response => response.json())
+    .then(itineraries => {
+      console.log('itineraries:', itineraries)
+      // this.setState({
+      //   itineraries: itineraries.d.results
+      // })
+      })
+}
+
+convertAddressToLatLon(address) {
+  // Converting the user's address input into lat/long coordinates
+  const Http = new XMLHttpRequest();
+  
+  const url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&location=${address}&callback=geocodeResult`;
+  Http.open("GET", url, true);
+  Http.responseType = 'json';
+  Http.send();
+
+  Http.onreadystatechange = () => {
+    if(Http.status === 200){
+      debugger
+    }
+    // if(Http.responseText !== null && Http.responseText.length > 0){
+    //   debugger
+    //   console.log('Http.responseText:', Http.responseText)
+    // }
+    
+    // // console.log('Http.geocodeResult:', Http.geocodeResult)
+  }
+
+  // fetch(url)
+  // .then(res=> {
+  //   debugger
+  //   return null
+  // })
+  // .then(console.log)
+  
+
 }
 
 
@@ -102,11 +159,15 @@ export default class App extends Component {
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout}
                 handleInputChange={this.handleInputChange}
+                handleSubmit={this.handleSubmit}
                 loggedInStatus={this.state.loggedInStatus}
-                lat1={this.state.lat1}
-                lon1={this.state.lon1}
-                lat2={this.state.lat2}
-                lon2={this.state.lon2}
+                // lat1={this.state.lat1}
+                // lon1={this.state.lon1}
+                // lat2={this.state.lat2}
+                // lon2={this.state.lon2}
+                origin={this.state.origin}
+                destination={this.state.destination}
+                destination_address={this.state.destination_address}
                 itineraries={this.state.itineraries}
               />
             )}

@@ -5,6 +5,7 @@ export class Directions extends Component {
   render(props) {
 
     var itineraries = this.props.itineraries;
+    var destination = this.props.destination;
     
     return (
       <div>
@@ -12,6 +13,7 @@ export class Directions extends Component {
           {itineraries.map(itinerary => (
               < Itinerary
                 itinerary={itinerary}
+                destination={this.props.destination}
                 key={itinerary.ItineraryId}
               />
             ))

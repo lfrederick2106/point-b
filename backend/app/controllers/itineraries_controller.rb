@@ -32,9 +32,10 @@ class ItinerariesController < ApplicationController
       response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
           http.request(request)
       end
+      
 
       puts "response.body:", response.body
-      puts "you made a get request I think?? to #index or /itineraries or some shit"
+      puts "you made a get request I think?? to #index or /itineraries ?"
       render json: response.body
   end
 
@@ -45,10 +46,10 @@ class ItinerariesController < ApplicationController
 
     query = URI.encode_www_form({
         # Request parameters
-        'lat1' => '29.759140',
-        'lon1' => '-95.363548',
-        'lat2' => '29.741399',
-        'lon2' => '-95.587787',
+        'lat1' => '29.741390',
+        'lon1' => '-95.587790',
+        'lat2' => '29.751080',
+        'lon2' => '-95.554380',
         'startTime' => `datetime'#{Time.now.utc.iso8601}'`,
         '$format' => 'JSON',
         '$orderby' => 'EndTime',
@@ -89,33 +90,47 @@ class ItinerariesController < ApplicationController
   # POST /itineraries
   # POST /itineraries.json
   # def create
-  #   @itinerary = Itinerary.new(itinerary_params)
-
-  #   respond_to do |format|
-  #     if @itinerary.save
-  #       format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
-  #       format.json { render :show, status: :created, location: @itinerary }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @itinerary.errors, status: :unprocessable_entity }
-  #     end
-  #   end
+  #   @itinerary = Itinerary.create(itinerary_params)
+  #   render json: @itinerary 
   #   puts "you made a post request I think??"
   # end
 
   # PATCH/PUT /itineraries/1
   # PATCH/PUT /itineraries/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @itinerary.update(itinerary_params)
-  #       format.html { redirect_to @itinerary, notice: 'Itinerary was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @itinerary }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @itinerary.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def update
+    uri = URI('https://api.ridemetro.org/data/CalculateItineraryByPoints')
+
+    query = URI.encode_www_form({
+        # Request parameters
+        'lat1' => params[:lat1],
+        'lon1' => params[:lon1],
+        'lat2' => params[:lat2],
+        'lon2' => params[:lon2],
+        'startTime' => `datetime'#{Time.now.utc.iso8601}'`,
+        '$format' => 'JSON',
+        '$orderby' => 'EndTime',
+        '$expand' => 'Legs'
+    })
+
+    if uri.query && uri.query.length > 0
+        uri.query += '&' + query
+    else
+        uri.query = query
+    end
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    # Request headers
+    request['Ocp-Apim-Subscription-Key'] = '6741c2454ce544309f5020fbd7b6e4ca'
+    # Request body
+    request.body = "{body}"
+
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+        http.request(request)
+    end
+    puts "you made a patch request I think??"
+    render json: response.body
+
+  end
 
   # DELETE /itineraries/1
   # DELETE /itineraries/1.json
@@ -134,8 +149,8 @@ class ItinerariesController < ApplicationController
   #   end
 
   #   # Never trust parameters from the scary internet, only allow the white list through.
-  #   def itinerary_params
-  #     params.require(:itinerary).permit(:lat1, :lon1, :lat2, :lon2)
-  #   end
+    def itinerary_params
+      params.permit(:lat1, :lon1, :lat2, :lon2)
+    end
     
 end

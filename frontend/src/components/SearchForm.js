@@ -5,24 +5,45 @@ export class SearchForm extends Component {
     constructor(props) {
         super(props);
     
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-    handleSubmit(event){
-        alert('You have called handleSubmit!');
-        event.preventDefault();
-        let body = JSON.stringify({lat1: this.props.lat1, lon1: this.props.lon1, lat2: this.props.lat2, lon2: this.props.lon2})
-        fetch('http://localhost:3001/itineraries/1')
-        .then((response) => {return response.json()})
-        .then((itineraries) => {console.log("is this http request working? itineraries:", itineraries.d.results)})
-    }
+    // handleSubmit(event){
+    //     alert('You have called handleSubmit!');
+    //     event.preventDefault();
+    //     let body = JSON.stringify({lat1: this.props.lat1, lon1: this.props.lon1, lat2: this.props.lat2, lon2: this.props.lon2})
+    //     fetch('http://localhost:3001/itineraries/1')
+    //     .then((response) => {return response.json()})
+    //     .then((itineraries) => {console.log("is this http request working? itineraries:", itineraries.d.results)
+    //         this.setState({
+
+    //         })})
+    // }
 
     render() {
         return (
             <div>
                 <h2>I am SearchForm.js.</h2>
 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.props.onSubmit}>
+                <div>
+                        <label>Starting address:</label>
+                        <input 
+                            name="origin" 
+                            id="origin" 
+                            value={this.props.origin} 
+                            onChange={this.props.onChange}></input>
+                    </div>
+                    <div>
+                        <label>Destination address:</label>
+                        <input 
+                            name="destination" 
+                            id="destination" 
+                            value={this.props.destination} 
+                            onChange={this.props.onChange}></input>
+                    </div>
+
+{/* 
                     <div>
                         <label>lat1:</label>
                         <input 
@@ -57,7 +78,7 @@ export class SearchForm extends Component {
                             value={this.props.lon2} 
                             onChange={this.props.onChange}
                         ></input>
-                    </div>
+                    </div> */}
                     <div>
                         <input type="submit" value="Submit" />
                     </div>
