@@ -115,33 +115,38 @@ handleSubmit = (event) =>{
 
 convertAddressToLatLon(address) {
   // Converting the user's address input into lat/long coordinates
+
+  // fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${address}&callback=geocodeResult`)
+  //   .then(response => response.json())
+  //   .then(response => console.log(response));
+
+
   const Http = new XMLHttpRequest();
   
-  const url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&location=${address}&callback=geocodeResult`;
-  Http.open("GET", url, true);
-  Http.responseType = 'json';
-  Http.send();
+  const url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${address}`;
+  // Http.open("GET", url, true);
+  // // Http.responseType = 'json';
+  // Http.send();
 
-  Http.onreadystatechange = () => {
-    if(Http.status === 200){
-      debugger
-    }
-    // if(Http.responseText !== null && Http.responseText.length > 0){
-    //   debugger
-    //   console.log('Http.responseText:', Http.responseText)
-    // }
+  // Http.onreadystatechange = () => {
+  //   if(Http.status === 200){  
+  //   }
+  //   if(Http.responseText !== null && Http.responseText.length > 0){
+  //     // var obj = JSON.parse(Http.responseText)
+  //     console.log(obj)
+  //   }
     
-    // // console.log('Http.geocodeResult:', Http.geocodeResult)
-  }
+    // console.log('Http.geocodeResult:', Http.geocodeResult)
 
-  // fetch(url)
-  // .then(res=> {
-  //   debugger
-  //   return null
-  // })
-  // .then(console.log)
+  fetch(url)
+  .then(res=> {
+    return res.json()
+  })
+  .then(response => {
+    console.log(response.results[0].locations[0].latLng)
+  })
   
-
+  // }
 }
 
 
