@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Registration from './auth/Registration'
 import Login from './auth/Login';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+// import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 export class LoginCard extends Component {
     constructor(props) {

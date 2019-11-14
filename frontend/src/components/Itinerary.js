@@ -24,7 +24,7 @@ export class Itinerary extends Component {
                         return <p key={leg.ItineraryLegId}>Walk to {itinerary.StartStopName}.</p>
                     }
                     if(leg.RouteName.length===0 && leg.StopName.length===0 && leg.TransportType==='Arrived'){
-                    return <p key={leg.ItineraryLegId}>Walk {leg.Length} miles to your destination.</p>
+                    return <p key={leg.ItineraryLegId}>Walk to your destination.</p>
                     }
                     }
                 )}

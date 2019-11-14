@@ -102,56 +102,54 @@ handleSubmit = (event) =>{
     console.log(`this.state.origin_lon:`, this.state.origin_lon)
 
   // debugger
-  let body = JSON.stringify({lat1: this.state.origin_lat, lon1: this.state.origin_lon, lat2: this.state.destination_lat, lon2: this.state.destination_lon })
-  fetch('http://localhost:3001/itineraries/1', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: body,
-  })
-  .then(response => response.json(), console.log('PATCH request to the backend is happening'))
-    .then(itineraries => {
-      console.log('itineraries:', itineraries)
-        // this.setState({
-        //   itineraries: itineraries.d.results
-        // })
-    })
+  
 }
 
-convertAddressToLatLon(origin_address, destination_address) {
+convertAddressToLatLon() {
   // Converting the user's address input into lat/long coordinates
   
-  const origin_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${origin_address}`;
-  const destination_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${destination_address}`;
+  const origin_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${this.state.origin_address}`;
+  const destination_url=`http://www.mapquestapi.com/geocoding/v1/address?key=4qeX6BX4odWwh3ub2sJiMl3lZLHTzO5K&outFormat=json&location=${this.state.destination_address}`;
   
-  fetch(origin_url)
+  let originPromise = fetch(origin_url)
   .then(res=> {
     return res.json()
   })
   .then(response => {
-    this.setState({
-      origin_lat: response.results[0].locations[0].latLng.lat,
-      origin_lon: response.results[0].locations[0].latLng.lng
+    return ({
+      lat: response.results[0].locations[0].latLng.lat,
+      lon: response.results[0].locations[0].latLng.lng
     })
-
-    console.log('this.state.origin_lat:', this.state.origin_lat) // <<- Need to be setting state of itineraries here
-    console.log('this.state.origin_lon:', this.state.origin_lon) 
   })
 
-  fetch(destination_url)
+  let destinationPromise = fetch(destination_url)
   .then(res=> {
     return res.json()
   })
   .then(response => {
-    this.setState({
-      destination_lat: response.results[0].locations[0].latLng.lat,
-      destination_lon: response.results[0].locations[0].latLng.lng
+    return ({
+      lat: response.results[0].locations[0].latLng.lat,
+      lon: response.results[0].locations[0].latLng.lng
     })
-
-    console.log('this.state.destination_lat:', this.state.destination_lat) // <<- This is too late
-    console.log('this.state.destination_lon:', this.state.destination_lon) 
   })
+
+  Promise.all([ originPromise, destinationPromise ]).then( ([ origin, destination ]) => {
+    let body = JSON.stringify({lat1: origin.lat, lon1: origin.lon, lat2: destination.lat, lon2: destination.lon })
+    fetch('http://localhost:3001/itineraries/1', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body,
+    })
+    .then(response => response.json(), console.log('PATCH request to the backend is happening'))
+      .then(itineraries => {
+        console.log('itineraries:', itineraries)
+          this.setState({
+            itineraries: itineraries.d.results
+          })
+      })
+    })
 }
   render() {
     return (
