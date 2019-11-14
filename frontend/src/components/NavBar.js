@@ -11,7 +11,9 @@ export class NavBar extends Component {
               <nav>
                 <div className='dropdown'>
                   <div className='menu'>
-                      < Registration/>
+                      < Registration
+                        handleSuccessfulAuth={this.props.handleSuccessfulAuth}
+                      />
                       < Login
                         handleSuccessfulAuth={this.props.handleSuccessfulAuth}
                       />

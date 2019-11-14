@@ -44,8 +44,6 @@ export default class Home extends Component {
                         handleSuccessfulAuth={this.handleSuccessfulAuth}
                         handleLogoutClick={this.handleLogoutClick}
                     />
-
-                    {/* <button onClick={() => this.handleLogoutClick()}>Logout</button> */}
                    
                     < LoginMessage
                         loggedInStatus={this.props.loggedInStatus}
@@ -65,10 +63,10 @@ export default class Home extends Component {
                         favorites={this.props.favorites}
                         addDestinationToFavs={this.props.addDestinationToFavs}
                     />
-                    < FavoritesList
+                    {/* < FavoritesList
                         favorites={this.props.favorites}
                         clickFavorite={this.props.clickFavorite}
-                    />
+                    /> */}
                     < Directions
                         origin_lat={this.props.origin_lat}
                         origin_lon={this.props.origin_lon}

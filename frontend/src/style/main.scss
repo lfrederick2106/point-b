@@ -1,9 +1,9 @@
 /* Color Theme Swatches in Hex */
-// .Friends-on-roadtrip-together-taking-a-selfie-1-hex { color: #A6A6A6; }
-// .Friends-on-roadtrip-together-taking-a-selfie-2-hex { color: #D9D2B0; }
-// .Friends-on-roadtrip-together-taking-a-selfie-3-hex { color: #A6754B; }
-// .Friends-on-roadtrip-together-taking-a-selfie-4-hex { color: #D98C71; }
-// .Friends-on-roadtrip-together-taking-a-selfie-5-hex { color: #594D4D; }
+.Friends-on-roadtrip-together-taking-a-selfie-1-hex { color: #A6A6A6; }
+.Friends-on-roadtrip-together-taking-a-selfie-2-hex { color: #D9D2B0; }
+.Friends-on-roadtrip-together-taking-a-selfie-3-hex { color: #A6754B; }
+.Friends-on-roadtrip-together-taking-a-selfie-4-hex { color: #D98C71; }
+.Friends-on-roadtrip-together-taking-a-selfie-5-hex { color: #594D4D; }
 
 html {
     font-size: 62.5%; // 1rem is 10px
@@ -13,7 +13,7 @@ html {
 *::after,
 *::before {
     // margin: 0;
-    padding: 0;
+    // padding: 0;
     box-sizing: inherit;
     font-family: 'montserrat';
 }
@@ -29,10 +29,10 @@ body {
 
     background-color: #D98C71;
 
-    padding-top: 87px; /*50px for the height of the navbar + 37px for the offset*/
+    padding-top: 50px; /*50px for the height of the navbar + 37px for the offset*/
     padding-bottom: 50px; /*50px for the height of the bottom navbar*/
 
-    height: 100vh;
+    min-height: auto;
 }
 
 a, button {
@@ -44,12 +44,11 @@ html, body {
 }
 
 .NavBar {
-    background-image: linear-gradient(to bottom right, #A6A6A6, #D9D2B0);
     width: 100%;
     position: fixed;
     padding: 0;
 
-    top: 5px; /*Offsets the top navbar 37px from the top of the viewport*/
+    top: 5px; /*Offsets the top navbar from the top of the viewport*/
 }
 
 button {
@@ -80,7 +79,7 @@ h1 {
     height: 100%;
     width: 100%;
     justify-items: center;
-    background-color: #A6754B;
+    // background-color: #D9D2B0;
 }
 
 .dropdown {
@@ -159,6 +158,9 @@ h1 {
   // margin: auto;
   // padding-top: 115px;
   clear: both;
+  background-image: linear-gradient(to bottom left, #594D4D, #D9D2B0);
+  border-radius: 5px;
+  overflow: auto;
 }
 
 .banner {
@@ -168,4 +170,11 @@ h1 {
 
 .bigDiv {
   clear: both;
+}
+
+.topSection {
+  background-image: linear-gradient(to bottom right, #D98C71, #594D4D);
+  border-radius: 5px;
+  overflow-y: overlay;
+  min-height: 150px;
 }

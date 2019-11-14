@@ -27,7 +27,7 @@ export class SearchForm extends Component {
                             id="destination_address" 
                             value={this.props.destination_address} 
                             onChange={this.props.onChange}></input>
-                        <button onClick={() => this.props.addDestinationToFavs()}>Add destination to favorites</button>
+                        {/* <button onClick={() => this.props.addDestinationToFavs()}>Add destination to favorites</button> */}
                     </div>
                     <div>
                         <input type="submit" value="Submit" />
