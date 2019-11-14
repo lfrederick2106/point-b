@@ -9,7 +9,7 @@ export class SearchForm extends Component {
     render() {
         return (
             <div>
-                <h2>I am SearchForm.js.</h2>
+                <h2>Search your bus route here:</h2>
 
                 <form onSubmit={this.props.onSubmit}>
                 <div>
@@ -27,6 +27,7 @@ export class SearchForm extends Component {
                             id="destination_address" 
                             value={this.props.destination_address} 
                             onChange={this.props.onChange}></input>
+                        <button onClick={() => this.props.addDestinationToFavs()}>Add destination to favorites</button>
                     </div>
                     <div>
                         <input type="submit" value="Submit" />

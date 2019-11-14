@@ -1,39 +1,24 @@
 import React, { Component } from 'react'
-import LoginCard from './LoginCard'
+import Login from './auth/Login'
+import Registration from './auth/Registration'
 
 export class NavBar extends Component {
-    render() {
-          
+    render(props) {
+      
+      console.log('this.props.handleLogoutClick:', this.props.handleLogoutClick)    
         return (
             <div>
-              {/* DO THINGS HERE */}
               <nav>
                 <div className='dropdown'>
-                  <button><a href = '#' className='home'>Home</a></button>
                   <div className='menu'>
-                    <button>Menu</button>
-                    <ul>
-                      <li><a href = '#'>Register</a></li>
-                      <li><a href = '#'>Login</a></li>
-                      <li><a href = '#'>Logout</a></li>
-                    </ul>
+                      < Registration/>
+                      < Login
+                        handleSuccessfulAuth={this.props.handleSuccessfulAuth}
+                      />
+                      <button onClick={() => this.props.handleLogoutClick()}>Logout</button>
                   </div>
                 </div>
               </nav>
-
-
-
-                
-                {/* <div>
-                    <button onClick={() => this.props.handleLogoutClick()}>Logout</button>
-                    <LoginCard
-                        // { ... props} 
-                        handleLogin={this.props.handleLogin}
-                        handleLogout={this.props.handleLogout}
-                        loggedInStatus={this.props.loggedInStatus}
-                        handleSuccessfulAuth={this.props.handleSuccessfulAuth}
-                    />
-                </div> */}
             </div>
         )
     }

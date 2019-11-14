@@ -17,7 +17,8 @@ export default class App extends Component {
       destination_address:"",
       destination_lat:"",
       destination_lon:"",
-      itineraries: []
+      itineraries: [],
+      favorites: ['2277 S Kirkwood Rd, Houston, TX 77077', '708 Main St, Houston, TX 77002']
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -65,6 +66,7 @@ export default class App extends Component {
   }
 
   handleLogout() {
+    console.log('handleLogout was called')
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
       user: {}
@@ -100,9 +102,19 @@ handleSubmit = (event) =>{
   console.log(`this.state.origin_address:`, this.state.origin_address)
     console.log(`this.state.origin_lat:`, this.state.origin_lat)
     console.log(`this.state.origin_lon:`, this.state.origin_lon)
-
-  // debugger
   
+}
+
+addDestinationToFavs() {
+  this.setState({
+    favorites: [...this.state.favorites, this.state.destination_address]
+  })
+}
+
+clickFavorite(event) {
+  this.setState({
+    destination_address: target
+  })
 }
 
 convertAddressToLatLon() {
@@ -173,6 +185,9 @@ convertAddressToLatLon() {
                 destination_lon={this.state.destination_lon}
                 destination_address={this.state.destination_address}
                 itineraries={this.state.itineraries}
+                favorites={this.state.favorites}
+                addDestinationToFavs={this.addDestinationToFavs}
+                clickFavorite={this.clickFavorite}
               />
             )}
             />
