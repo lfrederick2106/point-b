@@ -96,7 +96,7 @@ export default class App extends Component {
 }
 
 handleSubmit = (event) =>{
-  alert('You have called handleSubmit!');
+  // alert('You have called handleSubmit!');
   event.preventDefault();
   this.convertAddressToLatLon(this.state.origin, this.state.destination)
   console.log(`this.state.origin_address:`, this.state.origin_address)
