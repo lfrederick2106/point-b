@@ -106,15 +106,18 @@ handleSubmit = (event) =>{
 }
 
 addDestinationToFavs() {
+  console.log('addDestinationToFavs was called')
   this.setState({
     favorites: [...this.state.favorites, this.state.destination_address]
   })
 }
 
 clickFavorite(event) {
-  this.setState({
-    destination_address: target
-  })
+  console.log('clickFavorite was called')
+  console.log('event:', event)
+  // this.setState({
+  //   destination_address: target
+  // })
 }
 
 convertAddressToLatLon() {
