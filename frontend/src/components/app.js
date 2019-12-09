@@ -114,7 +114,6 @@ addDestinationToFavs() {
 
 clickFavorite(event) {
   console.log('clickFavorite was called')
-  console.log('event:', event)
   // this.setState({
   //   destination_address: target
   // })
